@@ -1,8 +1,5 @@
-import styled from "styled-components";
-
-const StyledText = styled.p<{ size: number }>`
-  font-size: ${(props) => props.size}px;
-`;
+import styled, { DefaultTheme } from "styled-components";
+import Sizes, { SizesEnum } from "../../settings/sizes";
 
 export enum PoochTextVariant {
   LargeTitle = "LARGE_TITLE",
@@ -17,6 +14,32 @@ export enum PoochTextVariant {
   Caption1 = "CAPTION_1",
   Caption2 = "CAPTION_2",
 }
+
+export enum PoochTextWeight {
+  Thin = "100",
+  UltraLight = "200",
+  Light = "300",
+  Regular = "400",
+  Medium = "500",
+  SemiBold = "600",
+  Bold = "700",
+  Heavy = "800",
+  Black = "900",
+}
+
+export interface StyledTextProps {
+  size: number;
+  weight: string;
+  color: keyof DefaultTheme["palette"];
+  noBottomMargin?: boolean;
+}
+
+const StyledText = styled.p<StyledTextProps>`
+  margin-bottom: ${({ noBottomMargin }) => (noBottomMargin ? "0" : `${Sizes[SizesEnum.Small]}px`)};
+  color: ${({ theme, color }) => theme.palette[color]};
+  font-weight: ${({ weight }) => weight};
+  font-size: ${({ size }) => size}px;
+`;
 
 const variantSize: {
   [key in PoochTextVariant]: { standard: number; leading: number };
@@ -37,17 +60,26 @@ const variantSize: {
 interface PoochTextProps {
   children: string;
   variant?: PoochTextVariant;
+  weight?: PoochTextWeight;
   leading?: boolean;
+  noBottomMargin?: boolean;
+  color?: keyof DefaultTheme["palette"];
 }
 
-const Component = ({ children, variant, leading }: PoochTextProps) => {
+const Component = ({ children, variant, leading, weight, color, ...props }: PoochTextProps) => {
   const size = variantSize[variant || PoochTextVariant.Body][leading ? "leading" : "standard"];
 
-  return <StyledText size={size}>{children}</StyledText>;
+  return (
+    <StyledText size={size} weight={weight!} color={color!} {...props}>
+      {children}
+    </StyledText>
+  );
 };
 
 Component.defaultProps = {
   variant: PoochTextVariant.Body,
+  weight: PoochTextWeight.Regular,
+  color: "text",
 };
 
 export default Component;
