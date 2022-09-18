@@ -1,8 +1,8 @@
-import type {NextPage} from 'next'
-import Head from 'next/head'
-import {PoochBox, PoochText} from "../src/ui-components";
-import {PoochTextVariant} from "../src/ui-components/text";
-import {SizesEnum} from "../src/settings/sizes";
+import type { NextPage } from "next";
+import Head from "next/head";
+import { PoochBox, PoochText } from "../src/ui-components";
+import { PoochTextVariant } from "../src/ui-components/text";
+import { SizesEnum } from "../src/settings/sizes";
 
 const Home: NextPage = () => {
   return (
@@ -14,13 +14,13 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-      <PoochBox background="orange" padding={{ x: SizesEnum.ExtraLarge, y: SizesEnum.Large }}>
+        <PoochBox background="orange" padding={{ x: SizesEnum.ExtraLarge, y: SizesEnum.Large }}>
           <PoochText variant={PoochTextVariant.Title1}>Hello hooman!</PoochText>
           <PoochText variant={PoochTextVariant.Title3}>Woof, woof…</PoochText>
-      </PoochBox>
+        </PoochBox>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
