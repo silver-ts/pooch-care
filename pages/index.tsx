@@ -4,8 +4,11 @@ import { PoochBox, PoochButton, PoochContainer, PoochList, PoochText } from "../
 import { PoochTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   return (
     <div>
       <Head>
@@ -55,10 +58,12 @@ const Home: NextPage = () => {
             </PoochBox>
             <PoochBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
               <PoochBox inline padding={{ x: SizesEnum.Small }}>
-                <PoochButton>Sign in</PoochButton>
+                <PoochButton onClick={() => router.push("/app/auth/sign-in")}>Sign in</PoochButton>
               </PoochBox>
               <PoochBox inline padding={{ x: SizesEnum.Small }}>
-                <PoochButton variant="green">Sign up</PoochButton>
+                <PoochButton variant="green" onClick={() => router.push("/app/auth/sign-up")}>
+                  Sign up
+                </PoochButton>
               </PoochBox>
             </PoochBox>
           </PoochContainer>
