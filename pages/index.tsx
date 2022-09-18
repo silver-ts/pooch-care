@@ -5,8 +5,10 @@ import { PoochTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
 import { useRouter } from "next/router";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Home: NextPage = () => {
+  const intl = useIntl();
   const router = useRouter();
 
   return (
@@ -24,10 +26,12 @@ const Home: NextPage = () => {
           </PoochBox>
           <PoochBox padding={{ bottom: SizesEnum.Large }}>
             <PoochText variant={PoochTextVariant.LargeTitle} leading>
-              Hello Hooman!
+              <FormattedMessage id="page.home.head.title" />
             </PoochText>
           </PoochBox>
-          <PoochText>I am Pooch, your pet companion app. I will help you to take care of your pet.</PoochText>
+          <PoochText>
+            <FormattedMessage id="page.home.head.description" />
+          </PoochText>
         </PoochBox>
       </header>
 
@@ -35,34 +39,48 @@ const Home: NextPage = () => {
         <PoochBox padding={{ top: SizesEnum.Medium, bottom: SizesEnum.ExtraLarge }}>
           <PoochContainer>
             <PoochBox column alignX={FlexAlign.Center} width={BoxWidth.Full}>
-              <PoochText noBottomMargin>Current features:</PoochText>
-              <PoochBox width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }}>
-                <PoochList items={["Weight tracker", "Medication tracker", "Vaccination tracker"]}></PoochList>
-              </PoochBox>
-              <PoochText noBottomMargin>Planned features:</PoochText>
+              <PoochText noBottomMargin>
+                <FormattedMessage id="page.home.main.current_features" />
+              </PoochText>
               <PoochBox width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }}>
                 <PoochList
                   items={[
-                    "Dog park finder",
-                    "Walk tinder",
-                    "Dog walk tracking",
-                    "AI enhanced features",
-                    "and much more…",
+                    intl.formatMessage({ id: "page.home.main.features_list.weight" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.medications" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.vaccination" }),
                   ]}
                 ></PoochList>
               </PoochBox>
-              <PoochText variant={PoochTextVariant.Title3}>And all of this is free* and open source*!</PoochText>
+              <PoochText noBottomMargin>
+                <FormattedMessage id="page.home.main.planned_features_list" />
+              </PoochText>
+              <PoochBox width={BoxWidth.Full} padding={{ y: SizesEnum.Medium }}>
+                <PoochList
+                  items={[
+                    intl.formatMessage({ id: "page.home.main.features_list.dog_park" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.walk_tinder" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.dog_walk_tracking" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.ai_enhanced" }),
+                    intl.formatMessage({ id: "page.home.main.features_list.more" }),
+                  ]}
+                ></PoochList>
+              </PoochBox>
+              <PoochText variant={PoochTextVariant.Title3}>
+                <FormattedMessage id="page.home.main.price" />
+              </PoochText>
               <PoochText variant={PoochTextVariant.Footnote}>
-                *during alpha, after that we might introduce some paid features
+                <FormattedMessage id="page.home.main.price_details" />
               </PoochText>
             </PoochBox>
             <PoochBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
               <PoochBox inline padding={{ x: SizesEnum.Small }}>
-                <PoochButton onClick={() => router.push("/app/auth/sign-in")}>Sign in</PoochButton>
+                <PoochButton onClick={() => router.push("/app/auth/sign-in")}>
+                  <FormattedMessage id="common.sign_in" />
+                </PoochButton>
               </PoochBox>
               <PoochBox inline padding={{ x: SizesEnum.Small }}>
                 <PoochButton variant="green" onClick={() => router.push("/app/auth/sign-up")}>
-                  Sign up
+                  <FormattedMessage id="common.sign_up" />
                 </PoochButton>
               </PoochBox>
             </PoochBox>

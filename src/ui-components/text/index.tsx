@@ -1,5 +1,6 @@
 import styled, { DefaultTheme } from "styled-components";
 import Sizes, { SizesEnum } from "../../settings/sizes";
+import React from "react";
 
 export enum PoochTextVariant {
   LargeTitle = "LARGE_TITLE",
@@ -58,7 +59,7 @@ const variantSize: {
 };
 
 interface PoochTextProps {
-  children: string;
+  children: React.ReactNode;
   variant?: PoochTextVariant;
   weight?: PoochTextWeight;
   leading?: boolean;
