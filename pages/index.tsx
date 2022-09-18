@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { PoochBox, PoochContainer, PoochList, PoochText } from "../src/ui-components";
+import { PoochBox, PoochButton, PoochContainer, PoochList, PoochText } from "../src/ui-components";
 import { PoochTextVariant } from "../src/ui-components/text";
 import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
@@ -52,6 +52,14 @@ const Home: NextPage = () => {
               <PoochText variant={PoochTextVariant.Footnote}>
                 *during alpha, after that we might introduce some paid features
               </PoochText>
+            </PoochBox>
+            <PoochBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
+              <PoochBox inline padding={{ x: SizesEnum.Small }}>
+                <PoochButton>Sign in</PoochButton>
+              </PoochBox>
+              <PoochBox inline padding={{ x: SizesEnum.Small }}>
+                <PoochButton variant="green">Sign up</PoochButton>
+              </PoochBox>
             </PoochBox>
           </PoochContainer>
         </PoochBox>
