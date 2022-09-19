@@ -16,7 +16,7 @@ const Component: React.FunctionComponent<Props> = ({ title, message, onTryAgain 
     <PoochBox alignX={FlexAlign.Center} column>
       <PoochBox padding={{ bottom: SizesEnum.Medium }}>
         <PoochBox alignX={FlexAlign.Center}>
-          <PoochIcon icon="warning-outline" size={SizesEnum.ExtraLarge2} />
+          <PoochIcon icon="warning" size={SizesEnum.ExtraLarge2} />
         </PoochBox>
       </PoochBox>
       <PoochBox>

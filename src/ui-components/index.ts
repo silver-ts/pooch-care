@@ -1,5 +1,6 @@
 export { default as PoochBox } from "./box";
 export { default as PoochButton } from "./button";
+export { default as PoochCheckbox } from "./checkbox";
 export { default as PoochContainer } from "./container";
 export { default as PoochIcon } from "./icon";
 export { default as PoochInput } from "./input";
