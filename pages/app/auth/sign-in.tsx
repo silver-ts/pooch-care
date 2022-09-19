@@ -2,9 +2,19 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { FormattedMessage } from "react-intl";
 import { LayoutAuth } from "../../../src/layout";
-import { PoochBox, PoochButton, PoochInput } from "../../../src/ui-components";
+import { PoochBox, PoochButton, PoochInput, PoochText } from "../../../src/ui-components";
+import useSignIn from "../../../src/api/queries/sign-in";
+import { useEffect } from "react";
+import { BoxWidth } from "../../../src/ui-components/box";
 
 const SignIn: NextPage = () => {
+  const { accessToken, refreshToken, mutate, status, errorMessage } = useSignIn();
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.debug(accessToken, refreshToken);
+  });
+
   return (
     <div>
       <Head>
@@ -23,9 +33,15 @@ const SignIn: NextPage = () => {
           />
         </PoochBox>
         {/* eslint-disable-next-line no-console */}
-        <PoochButton onClick={() => console.debug("Sign in")}>
+        <PoochButton onClick={() => mutate({ username: "amadeusz@blanik.me", password: "Passw0rd!1" })}>
           <FormattedMessage id="common.sign_in" />
         </PoochButton>
+        <PoochBox width={BoxWidth.Full} background="purple" column>
+          <PoochText>{status}</PoochText>
+          <PoochText>{accessToken}</PoochText>
+          <PoochText>{refreshToken}</PoochText>
+          <PoochText>{errorMessage}</PoochText>
+        </PoochBox>
       </LayoutAuth>
     </div>
   );
