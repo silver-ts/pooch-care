@@ -1,1 +1,1 @@
-export { default as PoochTopbar } from "./topbar";
+export { default as ComponentErrorScreen } from "./error-screen";

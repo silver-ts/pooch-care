@@ -1,19 +1,49 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { LayoutAuth } from "../../../src/layout";
-import { PoochBox, PoochButton, PoochInput, PoochText } from "../../../src/ui-components";
+import { PoochBox, PoochButton, PoochInput, PoochModal } from "../../../src/ui-components";
 import useSignIn from "../../../src/api/queries/sign-in";
-import { useEffect } from "react";
-import { BoxWidth } from "../../../src/ui-components/box";
+import { useEffect, useState } from "react";
+import { ApiStatesTypes } from "../../../src/types/api-states.types";
+import { ComponentErrorScreen } from "../../../src/component";
+import { useRouter } from "next/router";
 
 const SignIn: NextPage = () => {
-  const { accessToken, refreshToken, mutate, status, errorMessage } = useSignIn();
+  const intl = useIntl();
+  const router = useRouter();
+
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const { accessToken, refreshToken, mutate, isLoading, status, errorMessage } = useSignIn();
+
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.debug(accessToken, refreshToken);
-  });
+    switch (status) {
+      case ApiStatesTypes.Error:
+        setErrorModalVisible(true);
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        break;
+      case ApiStatesTypes.Success:
+        if (accessToken) {
+          localStorage.setItem("accessToken", accessToken);
+        } else {
+          localStorage.removeItem("accessToken");
+        }
+
+        if (refreshToken) {
+          localStorage.setItem("refreshToken", refreshToken);
+        } else {
+          localStorage.removeItem("refreshToken");
+        }
+        router.push("/app");
+      default:
+        setErrorModalVisible(false);
+    }
+  }, [status, accessToken, refreshToken]);
 
   return (
     <div>
@@ -25,23 +55,27 @@ const SignIn: NextPage = () => {
 
       <LayoutAuth title="page.sign_in.header" description="page.sign_in.description">
         <PoochBox column>
-          <PoochInput label="E-mail" placeholder="joe.doe@pooch.rocks" type="email" errors={["Wrong e-mail format"]} />
           <PoochInput
-            label="Password"
-            type="password"
-            errors={["Passwords are not the same", "Password do not pass requirements"]}
+            label="E-mail"
+            placeholder="joe.doe@pooch.rocks"
+            type="email"
+            value={username}
+            onChange={setUsername}
           />
+          <PoochInput label="Password" type="password" value={password} onChange={setPassword} />
         </PoochBox>
-        {/* eslint-disable-next-line no-console */}
-        <PoochButton onClick={() => mutate({ username: "amadeusz@blanik.me", password: "Passw0rd!1" })}>
+        <PoochButton onClick={() => mutate({ username, password })} disabled={isLoading}>
           <FormattedMessage id="common.sign_in" />
         </PoochButton>
-        <PoochBox width={BoxWidth.Full} background="purple" column>
-          <PoochText>{status}</PoochText>
-          <PoochText>{accessToken}</PoochText>
-          <PoochText>{refreshToken}</PoochText>
-          <PoochText>{errorMessage}</PoochText>
-        </PoochBox>
+        {errorModalVisible && (
+          <PoochModal onClose={() => setErrorModalVisible(false)}>
+            <ComponentErrorScreen
+              title={intl.formatMessage({ id: "common.error_header" })}
+              message={errorMessage || intl.formatMessage({ id: "common.error_message" })}
+              onTryAgain={() => mutate({ username, password })}
+            />
+          </PoochModal>
+        )}
       </LayoutAuth>
     </div>
   );

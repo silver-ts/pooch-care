@@ -7,6 +7,8 @@ import { PoochText } from "../index";
 import { PoochTextVariant } from "../text";
 
 interface Props {
+  value: string;
+  onChange: (nextValue: string) => void;
   label: string;
   placeholder?: string;
   errors?: string[];
@@ -32,12 +34,17 @@ const StyledInput = styled.input`
   }
 `;
 
-const Component: React.FunctionComponent<Props> = ({ label, placeholder, type, errors }) => (
+const Component: React.FunctionComponent<Props> = ({ label, placeholder, type, errors, value, onChange }) => (
   <Box padding={{ bottom: SizesEnum.Medium }} column>
     <Box padding={{ bottom: SizesEnum.Medium }}>
       <PoochText variant={PoochTextVariant.Callout}>{label}</PoochText>
     </Box>
-    <StyledInput placeholder={placeholder} type={type} />
+    <StyledInput
+      placeholder={placeholder}
+      type={type}
+      value={value}
+      onChange={({ target: { value: nextValue } }) => onChange(nextValue)}
+    />
     <Box padding={{ bottom: SizesEnum.Medium }}>
       <PoochText color="red" variant={PoochTextVariant.Caption1}>
         {(errors || []).map((error, index) => error).join(", ")}
