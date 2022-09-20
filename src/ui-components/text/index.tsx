@@ -58,7 +58,7 @@ const variantSize: {
   [PoochTextVariant.Caption2]: { standard: 11, leading: 13 },
 };
 
-interface PoochTextProps {
+export interface Props {
   children: React.ReactNode;
   variant?: PoochTextVariant;
   weight?: PoochTextWeight;
@@ -67,7 +67,7 @@ interface PoochTextProps {
   color?: keyof DefaultTheme["palette"];
 }
 
-const Component = ({ children, variant, leading, weight, color, ...props }: PoochTextProps) => {
+const Component: React.FunctionComponent<Props> = ({ children, variant, leading, weight, color, ...props }) => {
   const size = variantSize[variant || PoochTextVariant.Body][leading ? "leading" : "standard"];
 
   return (
