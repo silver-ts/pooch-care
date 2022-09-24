@@ -6,8 +6,8 @@ import { PoochTextVariant } from "../../ui-components/text";
 import { FormattedMessage } from "react-intl";
 
 interface Props {
-  title: string;
-  message: string;
+  title?: string;
+  message?: string;
   onTryAgain?: () => void;
 }
 
@@ -21,11 +21,11 @@ const Component: React.FunctionComponent<Props> = ({ title, message, onTryAgain 
       </PoochBox>
       <PoochBox>
         <PoochText variant={PoochTextVariant.Title1} leading>
-          {title}
+          {title ?? <FormattedMessage id="common.error_header" />}
         </PoochText>
       </PoochBox>
       <PoochText variant={PoochTextVariant.Headline} leading>
-        {message}
+        {message ?? <FormattedMessage id="common.error_message" />}
       </PoochText>
       {onTryAgain && (
         <PoochBox padding={{ top: SizesEnum.Large }}>

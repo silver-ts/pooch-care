@@ -3,9 +3,13 @@ import { PoochBox, PoochButton, PoochContainer, PoochIcon, PoochText } from "../
 import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import { PoochTextVariant } from "../../ui-components/text";
+import { PoochIcons } from "../../ui-components/icon";
 
-interface StyledBottomBarButtonProps {
+interface ItemProps {
   active: boolean;
+  icon: PoochIcons;
+  name: string;
+  disabled?: boolean;
 }
 
 const StyledBottomBar = styled(PoochBox)`
@@ -14,15 +18,19 @@ const StyledBottomBar = styled(PoochBox)`
   left: 0;
 `;
 
-const Item = ({ active }: { active: boolean }) => (
+const Item = ({ active, icon, name, disabled }: ItemProps) => (
   // eslint-disable-next-line no-console
-  <PoochButton onClick={() => console.debug("Button clicked")} variant={active ? "background" : "backgroundSecondary"}>
+  <PoochButton
+    onClick={() => console.warn("Button clicked")}
+    variant={active ? "background" : "backgroundSecondary"}
+    disabled={disabled}
+  >
     <PoochBox alignX={FlexAlign.Center} column>
       <PoochBox padding={{ bottom: SizesEnum.Small }}>
-        <PoochIcon icon="close-circle" size={SizesEnum.Large2} color={active ? "blue" : undefined} />
+        <PoochIcon icon={icon} size={SizesEnum.Large2} color={active ? "blue" : undefined} />
       </PoochBox>
       <PoochText variant={PoochTextVariant.Caption2} noBottomMargin uppercase color={active ? "blue" : undefined}>
-        Pets
+        {name}
       </PoochText>
     </PoochBox>
   </PoochButton>
@@ -39,10 +47,9 @@ const Component = () => {
     >
       <PoochContainer fullWidth>
         <PoochBox alignX={FlexAlign.SpaceBetween} width={BoxWidth.Full}>
-          <Item active={false} />
-          <Item active={true} />
-          <Item active={false} />
-          <Item active={false} />
+          <Item icon="apps" name="Pets" active={true} />
+          <Item icon="book" name="GDPR" active={false} disabled />
+          <Item icon="cog" name="Settings" active={false} disabled />
         </PoochBox>
       </PoochContainer>
     </StyledBottomBar>
