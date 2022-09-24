@@ -18,6 +18,7 @@ export default {
     variant: { options: PoochTextVariant, control: "select" },
     weight: { options: PoochTextWeight, control: "select" },
     leading: { control: "boolean" },
+    uppercase: { control: "boolean" },
     noBottomMargin: { control: "boolean" },
     color: { options: Object.keys(Theme.light.palette), control: "select" },
     sampleText: { control: "text" },
