@@ -5,10 +5,11 @@ import { LayoutApp } from "../../../../src/layout";
 import { useRouter } from "next/router";
 import usePetsSingle from "../../../../src/api/queries/pets-single";
 import { ComponentCardItem, ComponentCsr, ComponentErrorScreen, ComponentPetCard } from "../../../../src/component";
-import { PoochGrid, PoochList } from "../../../../src/ui-components";
+import { PoochGrid, PoochLineChart, PoochList } from "../../../../src/ui-components";
 import styled from "styled-components";
 import usePetsWeight from "../../../../src/api/queries/pets-weight";
 import { pipeDate } from "../../../../src/pipe";
+import { createRef } from "react";
 
 const StyledPetCard = styled.div`
   @media screen and (min-width: 900px) {
@@ -39,18 +40,20 @@ const App: NextPage = () => {
       </Head>
 
       <LayoutApp title={intl.formatMessage({ id: "page.pet_weight.header" })} back>
-        {pet && (
+        {pet && petsWeight && (
           <PoochGrid mobile={1} desktop={1}>
             <StyledPetCard>
               <ComponentPetCard {...pet} />
             </StyledPetCard>
-            <PoochList
-              label="KG"
-              items={petsWeight?.map((weight) => [weight.formatted, pipeDate(weight.date)]) ?? []}
+            <PoochLineChart
+              data={petsWeight.map(({ raw, formatted, date }) => ({ x: date, y: raw, labelY: formatted }))}
             />
+            <PoochList label="KG" items={petsWeight.map((weight) => [weight.formatted, pipeDate(weight.date)]) ?? []} />
           </PoochGrid>
         )}
-        {petError && <ComponentErrorScreen message={petError?.message} onTryAgain={handleTryAgain} />}
+        {(petError || petsWeightError) && (
+          <ComponentErrorScreen message={petError?.message} onTryAgain={handleTryAgain} />
+        )}
       </LayoutApp>
     </ComponentCsr>
   );
