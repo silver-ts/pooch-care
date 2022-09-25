@@ -3,7 +3,7 @@ import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import React from "react";
 import { PoochTextVariant } from "../../ui-components/text";
-import { ThemePalette } from "styled-components";
+import styled, { ThemePalette } from "styled-components";
 import { PoochIcons } from "../../ui-components/icon";
 
 interface Props {
@@ -12,6 +12,10 @@ interface Props {
   value: number | string;
   background: ThemePalette | ThemePalette[];
 }
+
+const StyledLabels = styled(PoochBox)`
+  overflow: hidden;
+`;
 
 const Component: React.FunctionComponent<Props> = ({ children, icon, value, background }) => {
   return (
@@ -24,12 +28,12 @@ const Component: React.FunctionComponent<Props> = ({ children, icon, value, back
       <PoochBox alignX={FlexAlign.Left} padding={{ bottom: SizesEnum.Large }}>
         <PoochIcon icon={icon} size={SizesEnum.ExtraLarge2} />
       </PoochBox>
-      <PoochBox alignX={FlexAlign.Right} alignY={FlexAlign.Bottom} width={BoxWidth.Full}>
+      <StyledLabels alignX={FlexAlign.Right} alignY={FlexAlign.Bottom} width={BoxWidth.Full}>
         <PoochText noBottomMargin>{children}</PoochText>&nbsp;&nbsp;
         <PoochText variant={PoochTextVariant.LargeTitle} noBottomMargin>
           {value}
         </PoochText>
-      </PoochBox>
+      </StyledLabels>
     </PoochBox>
   );
 };
