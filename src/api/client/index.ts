@@ -23,7 +23,8 @@ const STATUS_CODES = {
 };
 
 export default class ApiClient {
-  private readonly baseUrl: string = "https://pooch.rocks/api";
+  private readonly baseUrl: string =
+    process.env.NODE_ENV === "production" ? "https://pooch.rocks/api" : "http://localhost:3000/api";
 
   constructor(private readonly language: string) {}
 

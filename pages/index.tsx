@@ -6,10 +6,12 @@ import { SizesEnum } from "../src/settings/sizes";
 import { BoxWidth, FlexAlign } from "../src/ui-components/box";
 import { useRouter } from "next/router";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useSignedIn } from "../src/hooks";
 
 const Home: NextPage = () => {
   const intl = useIntl();
   const router = useRouter();
+  const signedIn = useSignedIn();
 
   return (
     <div>
@@ -73,16 +75,24 @@ const Home: NextPage = () => {
               </PoochText>
             </PoochBox>
             <PoochBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
-              <PoochBox inline padding={{ x: SizesEnum.Small }}>
-                <PoochButton onClick={() => router.push("/app/auth/sign-in")}>
-                  <FormattedMessage id="common.sign_in" />
+              {signedIn ? (
+                <PoochButton onClick={() => router.push("/app")}>
+                  <FormattedMessage id="common.open_app" />
                 </PoochButton>
-              </PoochBox>
-              <PoochBox inline padding={{ x: SizesEnum.Small }}>
-                <PoochButton variant="green" onClick={() => router.push("/app/auth/sign-up")}>
-                  <FormattedMessage id="common.sign_up" />
-                </PoochButton>
-              </PoochBox>
+              ) : (
+                <>
+                  <PoochBox inline padding={{ x: SizesEnum.Small }}>
+                    <PoochButton onClick={() => router.push("/app/auth/sign-in")}>
+                      <FormattedMessage id="common.sign_in" />
+                    </PoochButton>
+                  </PoochBox>
+                  <PoochBox inline padding={{ x: SizesEnum.Small }}>
+                    <PoochButton variant="green" onClick={() => router.push("/app/auth/sign-up")}>
+                      <FormattedMessage id="common.sign_up" />
+                    </PoochButton>
+                  </PoochBox>
+                </>
+              )}
             </PoochBox>
           </PoochContainer>
         </PoochBox>
