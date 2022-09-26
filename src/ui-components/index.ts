@@ -10,4 +10,5 @@ export { default as PoochLineChart } from "./line-chart";
 export { default as PoochList } from "./list";
 export { default as PoochLoader } from "./loader";
 export { default as PoochModal } from "./modal";
+export { default as PoochSheet } from "./sheet";
 export { default as PoochText } from "./text";
