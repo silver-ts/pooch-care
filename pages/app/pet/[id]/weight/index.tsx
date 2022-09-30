@@ -7,18 +7,19 @@ import usePetsSingle from "../../../../../src/api/queries/pets-single";
 import usePetsWeight from "../../../../../src/api/queries/pets-weight";
 import { ComponentAddWeight, ComponentErrorScreen, ComponentPetCard } from "../../../../../src/component";
 import { LayoutApp } from "../../../../../src/layout";
-import { PoochButton, PoochGrid, PoochLineChart, PoochList, PoochSheet } from "../../../../../src/ui-components";
+import { PoochButton, PoochGrid, PoochLineChart, PoochList } from "../../../../../src/ui-components";
 import { pipeDate } from "../../../../../src/pipe";
 import useConfigPrivate from "../../../../../src/api/queries/config-private";
 import usePetWeightAdd from "../../../../../src/api/queries/pet-weight-add";
 import { ApiStatesTypes } from "../../../../../src/types/api-states.types";
+import { ButtonSizes } from "../../../../../src/ui-components/button";
 
 interface AddButtonProps {
   onClick: () => void;
 }
 
 const AddButton: React.FunctionComponent<AddButtonProps> = ({ onClick }) => (
-  <PoochButton onClick={onClick}>
+  <PoochButton onClick={onClick} size={ButtonSizes.Small}>
     <FormattedMessage id="common.add" />
   </PoochButton>
 );

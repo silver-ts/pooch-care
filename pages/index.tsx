@@ -76,13 +76,13 @@ const Home: NextPage = () => {
             </PoochBox>
             <PoochBox alignX={FlexAlign.Center} padding={{ top: SizesEnum.Large }}>
               {signedIn ? (
-                <PoochButton onClick={() => router.push("/app")}>
+                <PoochButton variant="blue" onClick={() => router.push("/app")}>
                   <FormattedMessage id="common.open_app" />
                 </PoochButton>
               ) : (
                 <>
                   <PoochBox inline padding={{ x: SizesEnum.Small }}>
-                    <PoochButton onClick={() => router.push("/app/auth/sign-in")}>
+                    <PoochButton variant="blue" onClick={() => router.push("/app/auth/sign-in")}>
                       <FormattedMessage id="common.sign_in" />
                     </PoochButton>
                   </PoochBox>
