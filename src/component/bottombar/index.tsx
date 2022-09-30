@@ -4,12 +4,12 @@ import { BoxWidth, FlexAlign } from "../../ui-components/box";
 import { SizesEnum } from "../../settings/sizes";
 import { PoochTextVariant } from "../../ui-components/text";
 import { PoochIcons } from "../../ui-components/icon";
+import { ButtonSizes } from "../../ui-components/button";
 
 interface ItemProps {
   active: boolean;
   icon: PoochIcons;
   name: string;
-  disabled?: boolean;
 }
 
 const StyledBottomBar = styled(PoochBox)`
@@ -19,12 +19,12 @@ const StyledBottomBar = styled(PoochBox)`
   z-index: 1090;
 `;
 
-const Item = ({ active, icon, name, disabled }: ItemProps) => (
+const Item = ({ active, icon, name }: ItemProps) => (
   // eslint-disable-next-line no-console
   <PoochButton
     onClick={() => console.warn("Button clicked")}
     variant={active ? "background" : "backgroundSecondary"}
-    disabled={disabled}
+    size={ButtonSizes.Small}
   >
     <PoochBox alignX={FlexAlign.Center} column>
       <PoochBox padding={{ bottom: SizesEnum.Small }}>
@@ -49,8 +49,8 @@ const Component = () => {
       <PoochContainer fullWidth>
         <PoochBox alignX={FlexAlign.SpaceBetween} width={BoxWidth.Full}>
           <Item icon="apps" name="Pets" active={true} />
-          <Item icon="book" name="GDPR" active={false} disabled />
-          <Item icon="cog" name="Settings" active={false} disabled />
+          <Item icon="book" name="GDPR" active={false} />
+          <Item icon="cog" name="Settings" active={false} />
         </PoochBox>
       </PoochContainer>
     </StyledBottomBar>
