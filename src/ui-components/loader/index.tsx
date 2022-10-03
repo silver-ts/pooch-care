@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import type React from "react";
 import { SizesEnum } from "../../settings/sizes";
-import Box, { BoxWidth, FlexAlign } from "../box";
+import Box, { FlexAlign } from "../box";
 import { sizeMixin } from "../mixins";
 import { animated, useSpring } from "react-spring";
 import { toRgba } from "bme-utils";

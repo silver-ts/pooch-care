@@ -3,7 +3,6 @@ import { useMutation, useQueryClient } from "react-query";
 import ApiClient from "../client";
 import { ApiStatesTypes } from "../../types/api-states.types";
 import { useIntl } from "react-intl";
-import { PetsAddPayload } from "../payload/pets-add.payload";
 import { PetsAddResponseModel } from "../response-model/pets-add.response-model";
 import { CommonErrorResponseModel } from "../response-model/common-error.response-model";
 import { PetsUpdatePayload } from "../payload/pets-update.payload";

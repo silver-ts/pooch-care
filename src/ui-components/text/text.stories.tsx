@@ -3,10 +3,7 @@ import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Component, { PoochTextWeight, Props } from "./index";
 import { PoochTextVariant } from "../text";
-import { PoochBox, PoochText } from "../index";
-import { BoxWidth } from "../box";
-import { SizesEnum } from "../../settings/sizes";
-import { DefaultTheme } from "styled-components";
+import { PoochText } from "../index";
 import Theme from "../../settings/theme";
 
 type ComponentType = React.FunctionComponent<Props & { sampleText: string }>;

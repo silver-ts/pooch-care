@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Container from "../container";
 import Box, { BoxWidth } from "../box";
 import { SizesEnum } from "../../settings/sizes";
-import Icon from "../icon";
 import Button from "../button";
 import { firstElement, toRgba } from "bme-utils";
 import Grid, { GridAlign } from "../grid";

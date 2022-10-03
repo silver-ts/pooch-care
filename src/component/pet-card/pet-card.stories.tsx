@@ -4,8 +4,6 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Component from "./index";
 import styled from "styled-components";
 import { PetKind } from "../../types/pet-kind.types";
-import { WeightValueResponseModel } from "../../api/response-model/weight-value.response-model";
-import { Breed } from "../../types/breed.types";
 
 export default {
   title: "Components/Pet card",
